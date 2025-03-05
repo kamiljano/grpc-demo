@@ -17,3 +17,8 @@ In order to generate the code out of the schema defined in service.proto, run th
 ```shell
 ./generate-code.sh
 ```
+
+## Running the app
+
+In apps/message-service run `go run main.go`.
+In apps/client run `pnpm dev`
