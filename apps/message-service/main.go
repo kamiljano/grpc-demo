@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 	"net"
+	"strconv"
+	"time"
 
 	pb "grpc.com/apps/message-service/grpc"
 
@@ -16,6 +18,16 @@ type server struct {
 
 func (s *server) Echo(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	return &pb.EchoResponse{Message: "You said: " + req.Message}, nil
+}
+
+func (s *server) EchoStream(req *pb.EchoRequest, stream pb.EchoService_EchoStreamServer) error {
+	for i := 0; i < 5; i++ {
+		if err := stream.Send(&pb.EchoResponse{Message: req.Message + " " + strconv.Itoa(i)}); err != nil {
+			return err
+		}
+		time.Sleep(1 * time.Second)
+	}
+	return nil
 }
 
 func main() {

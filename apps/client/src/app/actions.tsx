@@ -1,8 +1,7 @@
 'use server';
 
-import { echo } from '@/app/message-service';
+import { echo, messageService } from '@/app/message-service';
 import { EchoRequest } from '@/grpc/service';
-import { setTimeout } from 'node:timers/promises';
 
 export const getData = async (): Promise<string> => {
   const result = await echo(
@@ -17,10 +16,13 @@ export const getData = async (): Promise<string> => {
 // Note that this way we can define the type of the message, instead
 // of getting an arbitrary data from a web socket.
 export async function* streamData(): AsyncGenerator<string> {
-  for (let i = 0; i < 5; i++) {
-    console.log('Streamed message');
-    yield `Message ${i}`;
+  const stream = messageService.EchoStream(
+    new EchoRequest({
+      message: 'Hello from the server actions streamed request',
+    }),
+  );
 
-    await setTimeout(2000);
+  for await (const response of stream) {
+    yield response.message;
   }
 }
