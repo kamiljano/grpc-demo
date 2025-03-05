@@ -8,7 +8,7 @@ export default function Messages() {
 
   return (
     <div>
-      <h1>Messages</h1>
+      <h1>Get Message</h1>
       <button
         type="button"
         onClick={() => {

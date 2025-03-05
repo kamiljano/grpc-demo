@@ -2,6 +2,7 @@
 
 import Messages from '@/app/messages';
 import { ServerComponent } from '@/app/server-component';
+import StreamMessages from '@/app/message-stream';
 
 export default async function Home() {
   return (
@@ -9,6 +10,7 @@ export default async function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <ServerComponent />
         <Messages />
+        <StreamMessages />
       </main>
     </div>
   );
