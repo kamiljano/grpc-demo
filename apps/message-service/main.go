@@ -17,6 +17,9 @@ type server struct {
 }
 
 func (s *server) Echo(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
+	if err := req.Validate(); err != nil {
+		return nil, err
+	}
 	return &pb.EchoResponse{Message: "You said: " + req.Message}, nil
 }
 

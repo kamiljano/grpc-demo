@@ -1,9 +1,12 @@
 syntax = "proto3";
 
+import "validate/validate.proto";
+
 option go_package = "apps/message-service/grpc";
 
 message EchoRequest {
   string message = 1;
+  uint64 id = 2 [(validate.rules).uint64.gt = 999];
 }
 
 message EchoResponse {

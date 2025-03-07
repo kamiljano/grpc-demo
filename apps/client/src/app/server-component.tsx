@@ -5,7 +5,7 @@ import { EchoRequest } from '@/grpc/service';
 
 export async function ServerComponent() {
   const result = await echo(
-    new EchoRequest({ message: 'Hello from the server' }),
+    new EchoRequest({ message: 'Hello from the server', id: 100000 }),
   );
 
   return (

@@ -7,6 +7,7 @@ export const getData = async (): Promise<string> => {
   const result = await echo(
     new EchoRequest({
       message: 'Hello from the server actions',
+      id: 100000,
     }),
   );
 
